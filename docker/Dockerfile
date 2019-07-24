@@ -1,0 +1,13 @@
+FROM ubuntu:19.04
+
+RUN apt update
+RUN apt install -y python3-dev
+RUN apt install -y python3-pip
+
+RUN pip3 install requests
+RUN pip3 install socket-tentacles
+RUN pip3 install gributils-annotator
+
+ADD server.sh /server.sh
+
+CMD ["/server.sh"]
