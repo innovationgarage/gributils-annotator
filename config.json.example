@@ -1,0 +1,7 @@
+{
+    "index": "http://gribindexer:1028",
+    "connections": [
+        {"handler": "source", "type": "listen", "address": "tcp:1024"},
+        {"handler": "destination", "type": "listen", "address": "tcp:1025"}
+    ]
+}
