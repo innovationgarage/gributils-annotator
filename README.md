@@ -2,7 +2,8 @@
 
 Gributils-annotator is an annotation service from streams of
 positional messages. It annotates messages with weather data from a
-gributils server for the time and place of the message. Messages are
+[gributils server](https://github.com/innovationgarage/gributils)
+for the time and place of the message. Messages are
 sent and received in newline separated json format over simple tcp
 sockets, and the json attribute names used and time format are all
 GPSD compatible.
