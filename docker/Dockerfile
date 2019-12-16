@@ -1,5 +1,7 @@
 FROM ubuntu:19.04
 
+RUN echo Version 2
+
 RUN apt update
 RUN apt install -y python3-dev
 RUN apt install -y python3-pip
