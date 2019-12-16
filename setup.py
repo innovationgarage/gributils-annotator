@@ -3,7 +3,7 @@
 import setuptools
 
 setuptools.setup(name='gributils-annotator',
-      version='0.8',
+      version='0.9',
       description='Weather annotation service for streams of newline sepratade json positional messages based on gributils',
       long_description="""Weather annotation service for streams of newline sepratade json positional messages based on gributils""",
       long_description_content_type="text/markdown",

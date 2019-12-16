@@ -47,5 +47,6 @@ class SendHandler(socket_tentacles.SendHandler):
         return id(self)
         
 def annotator(config):
+    global index
     index = config["index"]
     socket_tentacles.run(config, {"source": ReceiveHandler, "destination": SendHandler})
