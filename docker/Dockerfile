@@ -8,7 +8,7 @@ RUN apt install -y python3-pip
 
 RUN pip3 install requests
 RUN pip3 install socket-tentacles
-RUN pip3 install gributils-annotator>=0.9.0
+RUN pip3 install gributils-annotator>=0.10
 
 ADD server.sh /server.sh
 

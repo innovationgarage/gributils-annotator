@@ -7,7 +7,7 @@ import json
 import queue
 import time
 import datetime
-import backtrace
+import traceback
 
 senders = set()
 index = None
@@ -24,7 +24,7 @@ class ReceiveHandler(socket_tentacles.ReceiveHandler):
                     sender.put(msg)
                 except Exception as e:
                     print(e)
-                    backtrace.print_exc()
+                    traceback.print_exc()
     
 class SendHandler(socket_tentacles.SendHandler):
     def handle(self):
