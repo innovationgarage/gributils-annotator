@@ -7,7 +7,7 @@ import json
 import queue
 import time
 import datetime
-import backtrace
+import traceback
 
 senders = set()
 index = None
@@ -17,14 +17,22 @@ class ReceiveHandler(socket_tentacles.ReceiveHandler):
         for msg in self.file:
             msg = json.loads(msg)
             if "lat" in msg and "lon" in msg and "timestamp" in msg:
-                res = requests.get(index + "/index/interpolate/timestamp?timestamp=%(timestamp)s&lat=%(lat)s&lon=%(lon)s" % msg)
-                msg["grib"] = res.json()
+                try:
+                    res = requests.get(index + "/index/interpolate/timestamp?timestamp=%(timestamp)s&lat=%(lat)s&lon=%(lon)s" % msg)
+                except Exception as e:
+                    print(e)
+                    traceback.print_exc()
+                else:
+                    try:
+                        msg["grib"] = res.json()
+                    except:
+                        print("Error getting grib data: %s: %s" % (res.status_code, res.content,))
             for sender in senders:
                 try:
                     sender.put(msg)
                 except Exception as e:
                     print(e)
-                    backtrace.print_exc()
+                    traceback.print_exc()
     
 class SendHandler(socket_tentacles.SendHandler):
     def handle(self):
@@ -47,5 +55,6 @@ class SendHandler(socket_tentacles.SendHandler):
         return id(self)
         
 def annotator(config):
+    global index
     index = config["index"]
     socket_tentacles.run(config, {"source": ReceiveHandler, "destination": SendHandler})
